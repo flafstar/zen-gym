@@ -1,0 +1,16 @@
+{
+  "name": "ZEN GYM",
+  "short_name": "ZEN GYM",
+  "description": "Daily training maintenance system — momentum over perfection.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#030306",
+  "theme_color": "#030306",
+  "lang": "en",
+  "icons": [
+    { "src": "icon.png", "sizes": "180x180", "type": "image/png", "purpose": "any" },
+    { "src": "icon.png", "sizes": "180x180", "type": "image/png", "purpose": "maskable" }
+  ]
+}
