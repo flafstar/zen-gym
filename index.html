@@ -120,7 +120,9 @@ body:before{content:"";position:fixed;inset:0;background:radial-gradient(circle 
 .energy-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:5px;margin-bottom:14px}
 .energy-num{padding:12px 0;background:rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.12);font-family:var(--mono);font-size:14px;font-weight:900;text-align:center}
 .energy-num.on{background:rgba(233,20,53,.18);border-color:var(--red);color:#fff}
-.life-screen{flex:1;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;display:flex;flex-direction:column;gap:7px;padding-bottom:14px}
+.life-screen{flex:1 1 auto;min-height:0;height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 130px);max-height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 130px);overflow-y:scroll;-webkit-overflow-scrolling:touch;display:block;padding-bottom:30px;overscroll-behavior:contain}
+.life-screen > *{margin-bottom:7px;display:block;width:100%}
+.life-screen > *:last-child{margin-bottom:0}
 .life-card{padding:16px}
 .life-pills.three{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:4px}
 .life-pills.three .life-pill{padding:18px 4px;font-size:12px;flex:none;letter-spacing:.1em;font-weight:900}
