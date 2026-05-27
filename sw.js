@@ -1,4 +1,4 @@
-const CACHE = 'zen-gym-v27';
+const CACHE = 'zen-gym-v28';
 const FILES = ['./', './index.html', './icon.png', './icon-180.png', './manifest.json'];
 
 self.addEventListener('install', e => {
