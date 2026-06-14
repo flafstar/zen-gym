@@ -1,4 +1,4 @@
-const CACHE = 'zen-gym-v28';
+const CACHE = 'zen-gym-v30';
 const FILES = ['./', './index.html', './icon.png', './icon-180.png', './manifest.json'];
 
 self.addEventListener('install', e => {
@@ -18,12 +18,14 @@ self.addEventListener('activate', e => {
 self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
   e.respondWith(
-    fetch(e.request).then(resp => {
-      if (resp && resp.status === 200 && resp.type === 'basic') {
-        const copy = resp.clone();
-        caches.open(CACHE).then(c => c.put(e.request, copy));
-      }
-      return resp;
-    }).catch(() => caches.match(e.request).then(c => c || caches.match('./index.html')))
+    caches.match(e.request).then(cached =>
+      cached || fetch(e.request).then(resp => {
+        if (resp && resp.status === 200 && resp.type === 'basic') {
+          const copy = resp.clone();
+          caches.open(CACHE).then(c => c.put(e.request, copy));
+        }
+        return resp;
+      }).catch(() => caches.match('./index.html'))
+    )
   );
 });
