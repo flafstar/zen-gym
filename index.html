@@ -200,6 +200,11 @@ body:before{content:"";position:fixed;inset:0;background:radial-gradient(circle 
 .log-head-bar .lh-watch:active{transform:translateY(1px)}
 .log-area .log-last{margin-top:2px}
 .log-area .etip{margin-top:2px}
+.cpps-rules{position:relative;z-index:2;margin:0 0 14px;padding:11px 13px;border:1px solid rgba(158,195,168,.28);border-left:3px solid rgba(158,195,168,.75);border-radius:4px;background:rgba(158,195,168,.05)}
+.cpps-rules b{display:block;font-family:var(--serif);font-size:11px;letter-spacing:.18em;color:#9ec3a8;margin-bottom:6px}
+.cpps-rules ul{margin:0;padding-left:15px}
+.cpps-rules li{font-size:11.5px;line-height:1.65;color:rgba(255,255,255,.72)}
+.cpps-rules li strong{color:#fff}
 </style>
 </head>
 <body>
@@ -208,7 +213,7 @@ body:before{content:"";position:fixed;inset:0;background:radial-gradient(circle 
 const REST={heavy:150,normal:90,isolation:90,full:150};
 const PLAN={
  fullA:{id:'fullA',name:'Full Body A',subtitle:'Legs / Push / Pull / Delts / Core',kanji:'壱',target:'A',system:'fullbody',exercises:[
-  {name:'Leg Press',detail:'power base, full depth',sets:2,reps:'12–15',rest:REST.full,type:'Legs',art:'脚',log:true},
+  {name:'Leg Press',detail:'light, high rep — exhale up',sets:2,reps:'15–20',rest:REST.normal,type:'Legs',art:'脚',log:true},
   {name:'Standing Cable Incline Press',detail:'upper chest',sets:2,reps:'12–15',rest:REST.full,type:'Chest',art:'胸',log:true},
   {name:'Lat Pulldown',detail:'wide grip',sets:2,reps:'12–15',rest:REST.full,type:'Back',art:'背',log:true},
   {name:'Cable Lateral Raise',detail:'single arm, leaning',sets:2,reps:'12–15',rest:REST.isolation,type:'Shoulders',art:'肩',log:true},
@@ -220,7 +225,7 @@ const PLAN={
   {name:'Seated Cable Row',detail:'medium grip',sets:2,reps:'12–15',rest:REST.full,type:'Back',art:'拉',log:true},
   {name:'Face Pull',detail:'rear delts, high elbows',sets:2,reps:'12–15',rest:REST.isolation,type:'Shoulders',art:'結',log:true},
   {name:'V-Bar Tricep Pushdown',detail:'lockout',sets:2,reps:'12–15',rest:REST.isolation,type:'Triceps',art:'腕',log:true},
-  {name:'Cable Crunch',detail:'curl down, contract',sets:2,reps:'12–15',rest:REST.isolation,type:'Core',art:'芯',log:true}]},
+  {name:'Cable Pallof Press',detail:'anti-rotation, breathe out',sets:2,reps:'12–15',rest:REST.isolation,type:'Core',art:'芯',log:true}]},
  fullMin:{id:'fullMin',name:'Minimum Mode',subtitle:'Tired day · home · 15 min',kanji:'最',target:'最',system:'fullbody',exercises:[
   {name:'Push-Up (Bars)',detail:'or DB press',sets:2,reps:'8–12',rest:60,type:'Chest',art:'胸',log:false},
   {name:'Band Row',detail:'squeeze the back',sets:2,reps:'12',rest:60,type:'Back',art:'背',log:false},
@@ -229,8 +234,8 @@ const PLAN={
  lazy:{id:'lazy',name:'Lazy Day',subtitle:'20 min protocol / keep the streak',kanji:'禅',target:'極',system:'extra',exercises:[
   {name:'Cable Lateral Raise',detail:'simple start',sets:3,reps:'15',rest:REST.isolation,type:'Shoulders',art:'肩'},
   {name:'Lat Pulldown',detail:'easy power',sets:3,reps:'12',rest:REST.heavy,type:'Back',art:'背'},
-  {name:'Cable Incline Press',detail:'or cable fly',sets:3,reps:'12',rest:REST.normal,type:'Chest',art:'胸'},
-  {name:'Face Pull',detail:'finish clean',sets:2,reps:'15',rest:REST.isolation,type:'Back',art:'結'}]},
+  {name:'Standing Cable Incline Press',detail:'or cable fly',sets:3,reps:'12',rest:REST.normal,type:'Chest',art:'胸'},
+  {name:'Face Pull',detail:'finish clean',sets:2,reps:'15',rest:REST.isolation,type:'Shoulders',art:'結'}]},
  push:{id:'push',name:'Push',subtitle:'Shoulders / Chest / Triceps',kanji:'押',target:'Ⅰ',system:'extra',exercises:[
   {name:'Cable Lateral Raise',detail:'single arm, leaning',sets:4,reps:'12–15',rest:REST.isolation,type:'Shoulders',art:'肩'},
   {name:'Standing Cable Incline Press',detail:'upper chest',sets:3,reps:'10–12',rest:REST.heavy,type:'Chest',art:'胸'},
@@ -239,10 +244,10 @@ const PLAN={
  pull:{id:'pull',name:'Pull',subtitle:'Back / Biceps / Posture',kanji:'引',target:'Ⅱ',system:'extra',exercises:[
   {name:'Lat Pulldown',detail:'wide grip',sets:4,reps:'10–12',rest:REST.heavy,type:'Back',art:'背'},
   {name:'Seated Cable Row',detail:'medium grip',sets:3,reps:'10–12',rest:REST.heavy,type:'Back',art:'拉'},
-  {name:'Face Pull',detail:'posture / rear delts',sets:3,reps:'15',rest:REST.isolation,type:'Back',art:'結'},
+  {name:'Face Pull',detail:'posture / rear delts',sets:3,reps:'15',rest:REST.isolation,type:'Shoulders',art:'結'},
   {name:'Cable Curl',detail:'or spider curl',sets:3,reps:'10–12',rest:REST.isolation,type:'Biceps',art:'腕'}]},
  legs3:{id:'legs3',name:'Legs + Detail',subtitle:'Legs / Shoulder finisher / Core',kanji:'礎',target:'Ⅲ',system:'extra',exercises:[
-  {name:'Leg Press',detail:'power base',sets:4,reps:'10–12',rest:REST.heavy,type:'Legs',art:'脚'},
+  {name:'Leg Press',detail:'light, high rep — exhale up',sets:3,reps:'15–20',rest:REST.normal,type:'Legs',art:'脚'},
   {name:'Seated Leg Curl',detail:'hamstrings',sets:3,reps:'12',rest:REST.normal,type:'Legs',art:'屈'},
   {name:'Leg Extension',detail:'1s pause top',sets:3,reps:'12',rest:REST.normal,type:'Legs',art:'伸'},
   {name:'Standing Calf Raise',detail:'full stretch',sets:3,reps:'15–20',rest:REST.isolation,type:'Calves',art:'脚'},
@@ -251,8 +256,8 @@ const PLAN={
  aesA:{id:'aesA',name:'Full Body A',subtitle:'Width focus · Delts / Back / Upper Chest',kanji:'甲',target:'拓',system:'aesthetic',exercises:[
   {name:'Cable Lateral Raise',detail:'single arm, leaning',sets:4,reps:'15',rest:REST.isolation,type:'Shoulders',art:'肩',log:true},
   {name:'Lat Pulldown',detail:'wide grip',sets:4,reps:'10–12',rest:REST.normal,type:'Back',art:'背',log:true},
-  {name:'Cable Incline Press',detail:'upper chest',sets:3,reps:'10–12',rest:REST.normal,type:'Chest',art:'胸',log:true},
-  {name:'Leg Press',detail:'power base, full depth',sets:3,reps:'10–12',rest:REST.normal,type:'Legs',art:'脚',log:true},
+  {name:'Standing Cable Incline Press',detail:'upper chest',sets:3,reps:'10–12',rest:REST.normal,type:'Chest',art:'胸',log:true},
+  {name:'Leg Press',detail:'light, high rep — exhale up',sets:3,reps:'15–20',rest:REST.normal,type:'Legs',art:'脚',log:true},
   {name:'Rear Delt Fly',detail:'lead with elbows wide',sets:3,reps:'15',rest:REST.isolation,type:'Shoulders',art:'翼',log:true},
   {name:'Ab Roller',detail:'core control',sets:3,reps:'8–12',rest:60,type:'Core',art:'芯',log:false}]},
  aesB:{id:'aesB',name:'Full Body B',subtitle:'Chest + Back detail · Triceps · Core',kanji:'乙',target:'精',system:'aesthetic',exercises:[
@@ -262,7 +267,7 @@ const PLAN={
   {name:'Seated Leg Curl',detail:'pull heels, squeeze',sets:3,reps:'12',rest:REST.normal,type:'Legs',art:'屈',log:true},
   {name:'Face Pull',detail:'rear delts, high elbows',sets:4,reps:'15',rest:REST.isolation,type:'Shoulders',art:'結',log:true},
   {name:'Rope Triceps Pushdown',detail:'spread at lockout',sets:2,reps:'12',rest:REST.isolation,type:'Triceps',art:'腕',log:true},
-  {name:'Hanging Leg Raise',detail:'controlled, no swing',sets:3,reps:'10',rest:60,type:'Core',art:'芯',log:false}]},
+  {name:'Dead Bug',detail:'low back flat, exhale',sets:3,reps:'10/side',rest:60,type:'Core',art:'芯',log:false}]},
  aesC:{id:'aesC',name:'Full Body C',subtitle:'Aesthetic balance · V-taper · Calves',kanji:'丙',target:'整',system:'aesthetic',exercises:[
   {name:'Cable Lateral Raise',detail:'single arm, leaning',sets:4,reps:'15',rest:REST.isolation,type:'Shoulders',art:'肩',log:true},
   {name:'Lat Pulldown',detail:'neutral or close grip',sets:3,reps:'10–12',rest:REST.normal,type:'Back',art:'背',log:true},
@@ -282,7 +287,7 @@ const HOME={
   {name:'Slow Push-Up Hold',detail:'3s descent',reps:'6–8',rest:HOME_REST,type:'Chest',art:'忍',hard:3,busy:0},
   {name:'Band Lateral Raise',detail:'shoulder width',reps:'15',rest:HOME_LIGHT,type:'Shoulders',art:'翼',hard:3,busy:2},
   {name:'Ab Roller',detail:'core control',reps:'8–12',rest:HOME_REST,type:'Core',art:'芯',hard:3,busy:2},
-  {name:'Plank',detail:'tight hold',reps:'40s',rest:HOME_LIGHT,type:'Core',art:'静',hard:3,busy:2}]},
+  {name:'Plank',detail:'easy brace — breathe, no straining',reps:'30s',rest:HOME_LIGHT,type:'Core',art:'静',hard:3,busy:2}]},
  pull:{kanji:'引',name:'Pull + Posture',subtitle:'Back / Posture / Core',target:'引',ex:[
   {name:'Band Row',detail:'squeeze the back',reps:'12',rest:HOME_REST,type:'Back',art:'背',hard:4,busy:3},
   {name:'Band Face Pull',detail:'rear delts',reps:'15',rest:HOME_LIGHT,type:'Back',art:'結',hard:3,busy:2},
@@ -291,24 +296,24 @@ const HOME={
   {name:'Band Reverse Fly',detail:'bent over, arms wide',reps:'12',rest:HOME_LIGHT,type:'Back',art:'翼',hard:3,busy:0},
   {name:'Ab Roller',detail:'core control',reps:'8–12',rest:HOME_REST,type:'Core',art:'芯',hard:3,busy:2}]},
  legs:{kanji:'礎',name:'Legs + Core',subtitle:'Lower body / Core',target:'礎',ex:[
-  {name:'Bulgarian Split Squat',detail:'rear foot elevated',reps:'10/leg',rest:HOME_REST,type:'Legs',art:'脚',hard:3,busy:3},
-  {name:'Slow Bodyweight Squat',detail:'3s descent',reps:'15',rest:HOME_REST,type:'Legs',art:'屈',hard:3,busy:2},
-  {name:'Glute Bridge',detail:'pause at top',reps:'15',rest:HOME_LIGHT,type:'Glutes',art:'橋',hard:3,busy:2},
+  {name:'Band Leg Curl',detail:'lying, heels to glutes',reps:'15',rest:HOME_REST,type:'Legs',art:'屈',hard:3,busy:2},
+  {name:'Band Leg Extension',detail:'seated, 1s pause top',reps:'15',rest:HOME_REST,type:'Legs',art:'伸',hard:3,busy:2},
+  {name:'Standing Band Abduction',detail:'band at ankles, slow',reps:'15/leg',rest:HOME_LIGHT,type:'Legs',art:'開',hard:3,busy:2},
   {name:'Calf Raise',detail:'full stretch',reps:'20',rest:HOME_LIGHT,type:'Calves',art:'踵',hard:3,busy:0},
   {name:'Ab Roller',detail:'core control',reps:'8–10',rest:HOME_REST,type:'Core',art:'芯',hard:3,busy:2},
-  {name:'Hollow Hold',detail:'low back glued',reps:'20s',rest:HOME_LIGHT,type:'Core',art:'空',hard:3,busy:2}]},
+  {name:'Dead Bug',detail:'low back flat, exhale',reps:'10/side',rest:HOME_LIGHT,type:'Core',art:'芯',hard:2,busy:2}]},
  recovery:{kanji:'禅',name:'Recovery + Mobility',subtitle:'Foam roll / Stretch / Posture',target:'禅',ex:[
   {name:'Foam Roll Flow',detail:'back, quads, IT, calves',reps:'3 min',rest:20,type:'Recovery',art:'圓',hard:1,busy:1,dead:1},
   {name:'Chest Stretch',detail:'doorway / floor',reps:'30s',rest:15,type:'Mobility',art:'胸',hard:2,busy:1,dead:1},
   {name:'Thoracic Rotation',detail:'open the spine',reps:'10/side',rest:15,type:'Mobility',art:'軸',hard:2,busy:1,dead:1},
   {name:'Hip Flexor Stretch',detail:'pillow under knee',reps:'30s/leg',rest:15,type:'Mobility',art:'腰',hard:2,busy:1,dead:1},
-  {name:'Hamstring Stretch',detail:'slow tilt',reps:'30s/leg',rest:15,type:'Mobility',art:'伸',hard:2,busy:1,dead:0},
+  {name:'Hamstring Stretch',detail:'lying, band round foot',reps:'30s/leg',rest:15,type:'Mobility',art:'伸',hard:2,busy:1,dead:0},
   {name:'Deep Squat Hold',detail:'pry the knees',reps:'30s',rest:15,type:'Mobility',art:'蹲',hard:3,busy:2,dead:1},
   {name:'Shoulder Mobility',detail:'band dislocates',reps:'10',rest:15,type:'Mobility',art:'肩',hard:2,busy:1,dead:0},
   {name:'Cat Cow',detail:'breathe with motion',reps:'10',rest:15,type:'Mobility',art:'背',hard:2,busy:1,dead:1}]},
  emergency:{kanji:'緊',name:'Emergency Protocol',subtitle:'I almost skipped — 3 min',target:'緊',ex:[
   {name:'Push-Ups',detail:'any tempo',reps:'10',rest:20,type:'Push',art:'押',hard:1,busy:1},
-  {name:'Plank',detail:'hold tight',reps:'40s',rest:20,type:'Core',art:'静',hard:1,busy:1},
+  {name:'Plank',detail:'easy brace, breathe',reps:'30s',rest:20,type:'Core',art:'静',hard:1,busy:1},
   {name:'Band Pull-Apart',detail:'posture rescue',reps:'15',rest:20,type:'Posture',art:'結',hard:1,busy:1},
   {name:'Box Breathing',detail:'4-4-4-4',reps:'60s',rest:0,type:'Mind',art:'息',hard:1,busy:1}]}
 };
@@ -359,7 +364,7 @@ const RECOVERY={
   {label:'Alt',sub:'Alternative',url:'https://www.youtube.com/watch?v=_9JZuOO9E_w'},
   {label:'Short',sub:'Ultra short',url:'https://www.youtube.com/watch?v=ni3_6Ts80k0'}],
  quick:[
-  {name:'Hamstring Stretch',detail:'slow tilt forward',reps:'30s/leg',rest:10,art:'伸'},
+  {name:'Hamstring Stretch',detail:'lying, band round foot',reps:'30s/leg',rest:10,art:'伸'},
   {name:'Chest Stretch',detail:'doorway / floor',reps:'30s',rest:10,art:'胸'},
   {name:'Hip Flexor Stretch',detail:'pillow under knee',reps:'30s/leg',rest:10,art:'腰'},
   {name:'Glute Stretch',detail:'figure-4 / pigeon',reps:'30s/leg',rest:10,art:'臀'},
@@ -409,61 +414,58 @@ const TIPS={
  'Machine Shoulder Press':{tip:"Lower until elbows just below shoulders. Don't lock out hard at the top."},
  'Lat Pulldown':{tip:"Pull bar to upper chest. Lead with elbows down, don't lean back.",vid:1},
  'Standing Cable Incline Press':{tip:"Hands meet at eye level. Slight forward lean for upper chest.",vid:1},
- 'Cable Incline Press':{tip:"Hands meet at eye level. Slight forward lean for upper chest.",vid:1},
  'High → Low Cable Fly':{tip:"Sweep hands down to belly button. Slight forward lean."},
  'Low → High Cable Fly':{tip:"Sweep hands up to chin level. Squeeze upper chest."},
- 'Cable Fly':{tip:"Squeeze chest at full contraction. Slight bend in elbows."},
  'Rear Delt Fly':{tip:"Lead with elbows wide, not hands. Pause at full spread.",vid:1},
- 'Reverse Pec Deck':{tip:"Squeeze shoulder blades together hard. Arms slightly bent."},
  'Face Pull':{tip:"Pull rope to forehead. Elbows high, externally rotate at the end.",vid:1},
  'V-Bar Tricep Pushdown':{tip:"Lock elbows at sides. Only forearms move. Full lockout."},
  'Seated Cable Row':{tip:"Lead with elbows back. Squeeze blades. Don't rock for momentum."},
  'Cable Curl':{tip:"Elbows pinned to sides. Squeeze biceps at top, slow on the way down."},
- 'Rope Hammer Curl':{tip:"Neutral grip throughout. Twist outward at the top."},
- 'Leg Press':{tip:"Knees track over toes. Lower until ~90° at the knee."},
+ 'Leg Press':{tip:"LIGHT + high rep. Knees over toes, ~90°. Exhale on the push — never hold your breath.",vid:1},
  'Seated Leg Curl':{tip:"Pull heels to glutes. Pause and squeeze the contraction."},
  'Leg Extension':{tip:"Pause 1s at full extension at the top. Slow lower."},
  'Standing Calf Raise':{tip:"Full stretch at the bottom. Pause at peak height."},
- 'Ab Roller':{tip:"Roll out only as far as you can return without arching low back.",vid:1},
- 'Cable Crunch':{tip:"Kneel facing cable. Rope at forehead. Curl spine down — round, don't pull with arms.",vid:1},
+ 'Ab Roller':{tip:"Roll out only as far as you can return without arching low back. Exhale on the way out — no bearing down.",vid:1},
+ 'Cable Pallof Press':{tip:"Stand side-on to the cable. Press the handle straight out and resist the twist. Breathe out as you press — no bracing down.",vid:1},
+ 'Dead Bug':{tip:"On your back, low back flat to the floor. Opposite arm + leg reach out slow. Exhale as you extend. Zero pelvic strain.",vid:1},
  'Band Reverse Fly':{tip:"Hinge forward, hold band ends in front. Lift arms wide, lead with elbows, squeeze shoulder blades.",vid:1},
  'Push-Up (Bars)':{tip:"Deeper range than floor push-ups. Lower until chest is between the bars.",vid:1},
  'Pike Push-Up':{tip:"Hips high in downward dog. Lower head between hands.",vid:1},
  'Slow Push-Up Hold':{tip:"3-second descent. Pause 1s at the bottom. Burn the chest."},
  'Band Lateral Raise':{tip:"Stand on band. Lift to shoulder height with bent elbow."},
- 'Plank':{tip:"Straight line shoulder to heels. Squeeze glutes and core."},
+ 'Plank':{tip:"Straight line shoulder to heels. EASY brace — keep breathing. If you're straining or holding your breath, get off.",vid:1},
  'Band Row':{tip:"Anchor band low. Lead with elbows back, squeeze shoulder blades."},
  'Band Face Pull':{tip:"Pull band to forehead. Elbows high, externally rotate at the end.",vid:1},
  'Band Pull-Apart':{tip:"Arms straight at chest height. Pull band apart, squeeze blades."},
  'Superman Hold':{tip:"Lift chest, arms, and legs together. Squeeze glutes."},
- 'Reverse Snow Angel':{tip:"Face down on mat. Arms sweep from sides up overhead, keep arms off floor.",vid:1},
- 'Bulgarian Split Squat':{tip:"Rear foot on couch or chair. Front knee tracks over the toe.",vid:1},
- 'Slow Bodyweight Squat':{tip:"3-second descent. Knees out, chest up."},
- 'Glute Bridge':{tip:"Lying on back. Drive heels down, squeeze glutes hard at the top."},
+ 'Band Leg Curl':{tip:"Lie face down, band round the ankles anchored ahead. Pull heels to glutes, squeeze, slow return.",vid:1},
+ 'Band Leg Extension':{tip:"Sit, band under the foot anchored behind. Straighten the knee, 1s pause at the top.",vid:1},
+ 'Standing Band Abduction':{tip:"Band round the ankles. Lift the leg out to the side, slow, no swing. Stand tall.",vid:1},
  'Calf Raise':{tip:"Toes on edge of step. Full stretch at bottom, full peak at top."},
- 'Hollow Hold':{tip:"Low back glued to floor. Arms and legs hovering, breathe steady.",vid:1},
  'Foam Roll Flow':{tip:"Slow rolls, find tight spots, pause 30s on knots — don't bounce."},
  'Chest Stretch':{tip:"Arm pressed against doorway. Rotate body away from the wall."},
  'Thoracic Rotation':{tip:"Side-lying, top arm sweeps across to the opposite side. Follow with eyes.",vid:1},
  'Hip Flexor Stretch':{tip:"Half-kneel with pillow under knee. Push hips forward, squeeze back glute.",vid:1},
- 'Hamstring Stretch':{tip:"Sit with leg extended. Tilt forward from the hips, not lower back."},
- 'Deep Squat Hold':{tip:"Heels flat. Pry knees outward with elbows. Breathe deep."},
+ 'Hamstring Stretch':{tip:"LIE ON YOUR BACK. Band or strap round the foot, leg up straight. Low back stays flat — never sit and reach for your toes.",vid:1},
+ 'Deep Squat Hold':{tip:"Heels flat. Pry knees outward with elbows. Breathe deep — this is a stretch, not a squat."},
  'Shoulder Mobility':{tip:"Wide grip on band. Sweep arms overhead and behind, keep them straight.",vid:1},
- 'Wall Slide':{tip:"Back against wall. Slide arms up keeping wrists and elbows on the wall.",vid:1},
  'Push-Ups':{tip:"Any tempo. Get the reps in. Showing up beats perfection."},
  'Box Breathing':{tip:"Inhale 4s, hold 4s, exhale 4s, hold 4s. Repeat 5+ cycles.",vid:1},
  'Shoulder Circles':{tip:"10 forward, 10 back. Slow and full range of motion."},
  'Cat Cow':{tip:"On all fours. Alternate arching and rounding spine with breath.",vid:1},
  'Glute Stretch':{tip:"Cross ankle over opposite knee. Pull thigh toward chest."},
  'Child Pose':{tip:"Knees wide. Sit back on heels. Arms forward, breathe deeply."},
- 'Deep Breathing':{tip:"Inhale 4s, hold 4s, exhale 4s, hold 4s. Calm the nervous system.",vid:1},
+ 'Diaphragmatic Breathing':{tip:"On your back, knees bent. Hand on belly. Inhale so the BELLY rises, not the chest. Long slow exhale. This down-trains the pelvic floor.",vid:1},
+ 'Reverse Kegel':{tip:"The OPPOSITE of a kegel — let go, bulge outward gently as you exhale. Never squeeze/hold. Squeezing makes CPPS worse.",vid:1},
+ 'Happy Baby':{tip:"On your back, grab the feet, knees wide to the armpits. Fully relax the pelvic floor. Breathe into it.",vid:1},
+ 'Butterfly / Adductor':{tip:"Soles together, knees fall open. Don't force them down — let gravity do it. Breathe.",vid:1},
+ 'Glute / Figure-4':{tip:"Cross ankle over the opposite knee, pull the thigh in. Relax the jaw and the pelvic floor as you hold.",vid:1},
  'Upper Back':{tip:"Roller under shoulder blades. Hips down. Roll mid-back only — NOT neck.",vid:1},
  'Lats':{tip:"Side-lying with arm overhead. Roll under the armpit area."},
  'Glutes':{tip:"Sit on roller. Cross one ankle over knee, lean to that side."},
  'Quads':{tip:"Face down. Forearm support. Roller under the thigh."},
  'Calves':{tip:"Roller under calf. Cross other leg over to add pressure."},
  'Rope Triceps Pushdown':{tip:"Lock elbows at sides. Only forearms move. Spread the rope apart at lockout."},
- 'Hanging Leg Raise':{tip:"No swing — control the descent. Curl pelvis up at the top, don't just lift legs.",vid:1},
  'Straight-Arm Cable Pullover':{tip:"Step back from cable, slight forward lean. Arms nearly straight, pull rope to thighs, squeeze lats hard.",vid:1}
 };
 const app=document.getElementById('app'),nav=document.getElementById('nav');
@@ -499,7 +501,7 @@ function toggleLife(field){if(!state.lifeDraft)state.lifeDraft={date:todayKey()}
 function saveLifeEntry(){if(!state.lifeDraft)state.lifeDraft={};state.lifeDraft.date=todayKey();state.lifeDraft.timestamp=new Date().toLocaleString();state.life=state.life.filter(e=>e.date!==state.lifeDraft.date);state.life.unshift({...state.lifeDraft});saveLife();beep(700,.14,.28);vibe(60);state.showLifeSaved=true;setTimeout(()=>{state.showLifeSaved=false;if(state.screen==='life')render()},1400);render()}
 function commitLife(field,value){if(!state.lifeDraft)state.lifeDraft={date:todayKey()};state.lifeDraft[field]=+value}
 function adjustLife(field,delta,min,max){if(!state.lifeDraft)state.lifeDraft={date:todayKey()};let cur=state.lifeDraft[field];if(cur==null)cur=Math.round((min+max)/2);let next=cur+delta;if(next<min)next=min;if(next>max)next=max;state.lifeDraft[field]=next;render()}
-function renderHome(){let groups={fullbody:[],aesthetic:[],extra:[]};Object.values(PLAN).forEach(p=>{(groups[p.system]||groups.extra).push(p)});let sess=p=>`<button class="session card" onclick="pickPlan('${p.id}')"><div class="kanji">${p.kanji}</div><div><div class="name">${p.name}</div><div class="meta">${p.subtitle}</div></div><div class="target"><span>Target</span><b>${p.target}</b></div></button>`;let grp=(label,jp,arr)=>arr.length?`<div class="syslabel"><div class="syslabel-jp">${jp}</div><div class="syslabel-tx">${label}</div><div class="syslabel-line"></div></div><div class="sessions">${arr.map(sess).join('')}</div>`:'';let recCard=k=>{let r=RECOVERY[k];return `<button class="session card rec-session" onclick="pickRecovery('${k}')"><div class="kanji">${r.kanji}</div><div><div class="name">${r.name}</div><div class="meta">${r.sub}</div></div><div class="target"><span>Time</span><b>${r.time.split('–')[0]}</b></div></button>`};let recGrp=`<div class="syslabel"><div class="syslabel-jp" style="color:#9ec3a8;text-shadow:0 0 12px rgba(158,195,168,.36)">禅</div><div class="syslabel-tx">Recovery / Mobility</div><div class="syslabel-line" style="background:linear-gradient(90deg,rgba(158,195,168,.45),transparent)"></div></div><div class="sessions">${recCard('morning')}${recCard('night')}${recCard('cpps')}${recCard('roll')}</div>`;let streak=computeStreak(),rot=todayRotation(),lbl=ROT_NAMES[rot],dayName=new Date().toLocaleDateString('en-US',{weekday:'short'}).toUpperCase();app.innerHTML=`<div class="brand"><div><h1>ZEN GYM</h1><div class="jp">鍛錬 / DAILY MAINTENANCE</div><div class="online">System online <span style="margin-left:6px;color:var(--soft);opacity:.7">${clock()}</span></div></div><div class="seal">禅</div></div><div class="today"><div class="today-head"><div><div class="today-title">Today · ${dayName}</div><div class="today-day">${lbl}</div><div class="day-tag">Rotation // ${rot}</div></div><div class="today-jp">${HOME[rot].kanji}</div></div><div class="streak-row"><div class="streak-num">${streak}<small>day streak</small></div><div class="streak-dots">${streakDots()}</div></div><div class="today-q">What kind of day is today?</div><div class="today-actions"><button class="tbtn hard" onclick="pickHome('hard')">Hard<small>25–35 min</small></button><button class="tbtn busy" onclick="pickHome('busy')">Busy<small>10–15 min</small></button><button class="tbtn dead" onclick="pickHome('dead')">Dead Tired<small>5–10 · mobility</small></button><button class="tbtn emerg" onclick="pickHome('emergency')">Emergency · I almost skipped<small>3 min · streak preserved</small></button></div></div><div class="systems">${grp('Full Body · 2x/Week','本',groups.fullbody)}${grp('Aesthetic Efficiency · 3x/Week','拓',groups.aesthetic)}${recGrp}${grp('Optional Splits','禅',groups.extra)}</div>`;navRender()}
+function renderHome(){let groups={fullbody:[],aesthetic:[],extra:[]};Object.values(PLAN).forEach(p=>{(groups[p.system]||groups.extra).push(p)});let sess=p=>`<button class="session card" onclick="pickPlan('${p.id}')"><div class="kanji">${p.kanji}</div><div><div class="name">${p.name}</div><div class="meta">${p.subtitle}</div></div><div class="target"><span>Target</span><b>${p.target}</b></div></button>`;let grp=(label,jp,arr)=>arr.length?`<div class="syslabel"><div class="syslabel-jp">${jp}</div><div class="syslabel-tx">${label}</div><div class="syslabel-line"></div></div><div class="sessions">${arr.map(sess).join('')}</div>`:'';let recCard=k=>{let r=RECOVERY[k];return `<button class="session card rec-session" onclick="pickRecovery('${k}')"><div class="kanji">${r.kanji}</div><div><div class="name">${r.name}</div><div class="meta">${r.sub}</div></div><div class="target"><span>Time</span><b>${r.time.split('–')[0]}</b></div></button>`};let recGrp=`<div class="syslabel"><div class="syslabel-jp" style="color:#9ec3a8;text-shadow:0 0 12px rgba(158,195,168,.36)">禅</div><div class="syslabel-tx">Recovery / Mobility</div><div class="syslabel-line" style="background:linear-gradient(90deg,rgba(158,195,168,.45),transparent)"></div></div><div class="sessions">${recCard('morning')}${recCard('night')}${recCard('cpps')}${recCard('roll')}</div>`;let streak=computeStreak(),rot=todayRotation(),lbl=ROT_NAMES[rot],dayName=new Date().toLocaleDateString('en-US',{weekday:'short'}).toUpperCase();app.innerHTML=`<div class="brand"><div><h1>ZEN GYM</h1><div class="jp">鍛錬 / DAILY MAINTENANCE</div><div class="online">System online <span style="margin-left:6px;color:var(--soft);opacity:.7">${clock()}</span></div></div><div class="seal">禅</div></div><div class="today"><div class="today-head"><div><div class="today-title">Today · ${dayName}</div><div class="today-day">${lbl}</div><div class="day-tag">Rotation // ${rot}</div></div><div class="today-jp">${HOME[rot].kanji}</div></div><div class="streak-row"><div class="streak-num">${streak}<small>day streak</small></div><div class="streak-dots">${streakDots()}</div></div><div class="today-q">What kind of day is today?</div><div class="today-actions"><button class="tbtn hard" onclick="pickHome('hard')">Hard<small>25–35 min</small></button><button class="tbtn busy" onclick="pickHome('busy')">Busy<small>10–15 min</small></button><button class="tbtn dead" onclick="pickHome('dead')">Dead Tired<small>5–10 · mobility</small></button><button class="tbtn emerg" onclick="pickHome('emergency')">Emergency · I almost skipped<small>3 min · streak preserved</small></button></div></div><div class="cpps-rules"><b>骨盤 // PELVIC RULES — ALWAYS</b><ul><li><strong>Exhale on effort.</strong> Never hold your breath. No Valsalva, no bearing down.</li><li><strong>Stop 2–3 reps from failure.</strong> Pump, don't strain.</li><li><strong>No spinal-flexion abs</strong> (crunches, sit-ups, leg raises). Pallof / Dead Bug / Ab Roller only.</li><li><strong>Legs = machines &amp; bands, light.</strong> No squats, no hip thrusts, no RDLs.</li><li>Symptoms flare → drop to Recovery · CPPS. Not a failed week.</li></ul></div><div class="systems">${grp('Full Body · 2x/Week','本',groups.fullbody)}${grp('Aesthetic Efficiency · 3x/Week','拓',groups.aesthetic)}${recGrp}${grp('Optional Splits','禅',groups.extra)}</div>`;navRender()}
 function renderRecovery(){let key=state.recoveryKey,r=RECOVERY[key];if(!r){go('home');return}let vids=r.videos.map(v=>v.divider?`<div class="rec-divider"><span>${v.label}</span></div>`:`<button class="rec-vid" onclick="openVideo('${v.url}')">▶ <b>${v.label}</b> · ${v.sub}</button>`).join('');let quickList=r.quick.map(e=>`<div class="rec-ex"><span style="display:flex;align-items:center"><i>${e.art}</i>${e.name}</span><span>${e.reps}</span></div>`).join('');let avoidLine=r.avoid?`<div class="rec-avoid"><b>⚠</b> ${r.avoid}</div>`:'';app.innerHTML=`<div class="top"><button class="back" onclick="go('home')">‹ Back</button><div class="titlebar"><h2 class="section-title rec-title">${r.name}</h2><div class="section-sub">${r.sub}</div></div><span></span></div><div class="rec-screen"><div class="rec-hero card"><div class="rec-jp">${r.kanji}</div><div><div class="rec-quote">${r.quote}</div><div class="rec-time-tag">${r.time}</div></div></div><div class="rec-actions"><button class="rec-primary" onclick="startRecoveryQuick('${key}')">Quick Start · No Video</button>${vids}<button class="rec-mark" onclick="markRecoveryDone('${key}')">Mark Complete · Streak +1</button></div>${avoidLine}<div class="rec-list"><div class="rec-list-head">Quick Routine · No Video</div>${quickList}</div></div>`;navRender()}
 function renderPlan(){let p=state.plan,done=state.completed.size,total=p.exercises.length;let exRows=p.exercises.map((ex,i)=>{let extras='';if(ex.log){let last=getLastLog(ex.name);if(last){let lastStr=fmtLastLog(last);let rec=computeRec(ex.name,ex.reps,last.form);extras=`<div class="exlast">${lastStr}</div>${rec?`<div class="exrec">→ ${rec.text}</div>`:''}`}}return `<div class="row card ${state.completed.has(i)?'done':''}"><button class="check" onclick="toggleDone(${i})">✓</button><button style="text-align:left" onclick="startFocus(${i})"><div class="rname">${ex.name}</div><div class="rmeta">${ex.sets} SET · ${ex.reps} REP · REST ${ex.rest}</div>${extras}</button><button class="arrow" onclick="startFocus(${i})">›</button></div>`}).join('');app.innerHTML=`<div class="top"><button class="back" onclick="home()">‹ End</button><div class="count">${done}/${total}</div></div><div class="panelhead"><div><h2>${p.name}</h2><p>${p.subtitle}</p></div><span class="chip">Target ${p.target}</span></div><div class="quick" style="grid-template-columns:1fr 1fr"><button onclick="startFocus(nextUndone())">${state.completed.size>0?'Continue':'Start training'}</button><button onclick="finishWorkout()">Finish</button></div><div class="row card warm-card" style="grid-template-columns:42px 1fr 64px" onclick="startFocus(-1)"><div class="kanji" style="font-size:32px">円</div><div><div class="rname">Warm-up ${state.warmupDone?'<span style="color:var(--red)">· done</span>':''}</div><div class="rmeta">${state.warmupMin} min · ${state.warmupDone?'tap to redo':'tap to start'}</div></div><button class="chip" onclick="event.stopPropagation();editWarm()">Edit</button></div><div class="list">${exRows}</div><button class="btn dark" onclick="resetProgress()">Reset protocol</button>`;navRender()}
 function renderFocus(){let item=currentItem(),isWarm=item.kind==='warm',ex=item.ex,label=isWarm?'BODY CALIBRATION':state.phase==='set'?`SET ${state.setIdx+1} / ${ex.sets}`:state.phase==='ready'?'GET READY':state.phase==='idle'?'READY TO START':'RECOVERY PROTOCOL',num=isWarm||state.phase==='rest'?fmt(state.timeLeft):'GO',isLog=!isWarm&&state.phase==='set'&&ex&&ex.log,dur=!isWarm&&ex&&!ex.log?parseDuration(ex.reps):null,isDur=!isWarm&&state.phase==='set'&&dur&&dur>0,isIdle=!isWarm&&state.phase==='idle'&&dur&&dur>0,isReady=!isWarm&&state.phase==='ready'&&dur&&dur>0;let setProg='';if(!isWarm&&ex){let parts=[];for(let i=0;i<ex.sets;i++){let cls='';if(state.sessionLog[state.focus]&&state.sessionLog[state.focus].sets&&state.sessionLog[state.focus].sets[i])cls='on';if(i===state.setIdx&&state.phase==='set')cls='now';parts.push(`<i class="${cls}"></i>`)}setProg=`<div class="set-prog">${parts.join('')}</div>`}let lastHTML='',formHTML='',suggW='',suggR='';if(isLog){let last=getLastLog(ex.name),lastStr=last?fmtLastLog(last):null,rec=last?computeRec(ex.name,ex.reps,last.form):null;lastHTML=lastStr?`<div class="log-last">${lastStr}${rec?`<span class="rec">→ ${rec.text}</span>`:''}</div>`:`<div class="log-last">First time · your log will track progression</div>`;let cur=state.formRatings[state.focus]||'';formHTML=`<div class="form-row"><div class="lbl">Form check</div><button class="form-btn good ${cur==='good'?'on':''}" onclick="setForm('good')">Good</button><button class="form-btn okay ${cur==='okay'?'on':''}" onclick="setForm('okay')">Okay</button><button class="form-btn bad ${cur==='bad'?'on':''}" onclick="setForm('bad')">Bad</button></div>`;let prev=state.sessionLog[state.focus]&&state.sessionLog[state.focus].sets&&state.sessionLog[state.focus].sets[state.setIdx-1];if(prev){suggW=prev.weight||'';suggR=prev.reps||''}else if(last&&last.data.sets&&last.data.sets[0]){suggW=last.data.sets[0].weight||'';suggR=last.data.sets[0].reps||''}}let exHead=!isWarm?`<div class="acq"><div class="exercise-title card"><div class="etype">Target acquisition</div><div class="ename">${ex.name}</div><div class="edetail">Primary // ${ex.type}<br>${ex.detail||'clean execution'}</div>${TIPS[ex.name]?`<div class="etip">${TIPS[ex.name].tip}</div>`:''}${ex.name?`<button class="ewatch" onclick="openVideo('${searchUrl(ex.name)}')">▶ Watch demo</button>`:''}</div><div class="exercise-art card"><div class="body">${ex.art}</div></div></div>`:'';let logHead=!isWarm?`<div class="log-head-bar card"><div class="lh-art">${ex.art}</div><div class="lh-txt"><div class="etype">Target // ${ex.type}</div><div class="lh-name">${ex.name}</div></div>${ex.name?`<button class="lh-watch" onclick="openVideo('${searchUrl(ex.name)}')">▶</button>`:''}</div>`:'';let body=isWarm?`<div class="timer warm card"><div class="ring"></div><div class="inside"><div style="font-family:var(--serif);font-size:80px;color:var(--text)">円</div><div class="hint">Prepare the body. Focus the mind.</div><div class="num" id="num">${num}</div></div></div>`:isLog?`${logHead}<div class="log-area card">${setProg}<div class="log-set-label">SET ${state.setIdx+1} OF ${ex.sets} · ${ex.reps} REPS</div><div class="log-inputs"><div class="input-box"><div class="lbl">Weight (kg)</div><input id="inp-w" type="number" inputmode="decimal" step="0.5" value="${suggW}" placeholder="—" onfocus="kbScroll(this)"></div><div class="input-box"><div class="lbl">Reps</div><input id="inp-r" type="number" inputmode="numeric" step="1" value="${suggR}" placeholder="—" onfocus="kbScroll(this)"></div></div>${formHTML}${lastHTML}${TIPS[ex.name]?`<div class="etip">${TIPS[ex.name].tip}</div>`:''}</div>`:isIdle?`${exHead}<div class="timer idle card"><div class="ring"></div><div class="inside"><div class="label">${ex.reps}</div><div class="num">${fmt(dur)}</div><div class="hint">Set ${state.setIdx+1} of ${ex.sets} · tap Start below</div></div></div>`:isReady?`${exHead}<div class="timer ready card"><div class="ring"></div><div class="inside"><div class="label">GET READY</div><div class="num" id="num">${state.timeLeft||'GO'}</div><div class="hint">${ex.reps} · ${ex.detail||'positioning'}</div></div></div>`:isDur?`${exHead}<div class="timer rest card"><div class="ring"></div><div class="inside"><div class="label">HOLD · ${ex.reps}</div><div class="num" id="num">${fmt(state.timeLeft)}</div><div class="hint">Set ${state.setIdx+1} of ${ex.sets} · ${ex.detail||'hold and breathe'}</div></div></div>`:state.phase==='set'?`${exHead}<div class="timer go card"><div class="inside"><div class="label">${label}</div><div class="num">GO</div><div class="hint">${ex.reps} reps · slow and controlled</div></div></div>`:`<div class="timer rest card"><div class="ring"></div><div class="inside"><div class="label">Recover. Adapt. Grow.</div><div class="num" id="num">${num}</div><div class="hint">Next // Set ${state.setIdx+1} of ${ex.sets}</div></div></div>`;app.innerHTML=`<div class="top"><button class="back" onclick="go('plan')">‹</button><div class="titlebar"><h2 class="section-title">${isWarm?'Warm-up':state.phase==='rest'?'Rest':'Exercise'}</h2><div class="section-sub">${label}</div></div><button class="skip" onclick="${isWarm?'doneWarm()':'moveFocus(1)'}">${isWarm?'Skip':'Next'}</button></div>${swipeDots()}<div class="focus" ontouchstart="touchStart(event)" ontouchend="touchEnd(event)"><div class="focus-body">${body}</div><div class="actions">${isWarm?`<button class="btn red" onclick="doneWarm()">Done warm-up</button><div class="two"><button class="btn ghost" onclick="pauseTimer()">${state.paused?'Resume':'Pause'}</button><button class="btn ghost" onclick="addTime(60)">+1 min</button></div>`:isIdle?`<button class="btn red" onclick="startSet()">I'm ready</button><div class="two"><button class="btn ghost" onclick="moveFocus(-1)">‹ Previous</button><button class="btn ghost" onclick="moveFocus(1)">Skip ›</button></div>`:isReady?`<button class="btn ghost" onclick="skipReady()">Skip countdown</button>`:isDur?`<button class="btn red" onclick="doneSet()">Done set</button><div class="two"><button class="btn ghost" onclick="pauseTimer()">${state.paused?'Resume':'Pause'}</button><button class="btn ghost" onclick="addTime(15)">+15 sec</button></div>`:state.phase==='set'?`<button class="btn red" onclick="doneSet()">Done set</button><div class="two"><button class="btn ghost" onclick="moveFocus(-1)">‹ Previous</button><button class="btn ghost" onclick="moveFocus(1)">Next ›</button></div>`:`<button class="btn red" onclick="skipRest()">End rest</button><div class="two"><button class="btn ghost" onclick="pauseTimer()">${state.paused?'Resume':'Pause'}</button><button class="btn ghost" onclick="addTime(15)">+15 sec</button></div>`}</div></div>`;navRender()}
