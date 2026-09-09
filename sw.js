@@ -1,4 +1,4 @@
-const CACHE = 'zen-gym-v47';
+const CACHE = 'zen-gym-v48';
 const FILES = ['./', './index.html', './icon.png', './icon-180.png', './manifest.json'];
 
 self.addEventListener('install', e => {
@@ -9,7 +9,7 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
+      Promise.all(keys.filter(k => k.startsWith('zen-gym-') && k !== CACHE).map(k => caches.delete(k)))
     )
   );
   self.clients.claim();
