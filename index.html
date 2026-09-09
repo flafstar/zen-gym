@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="ZEN GYM">
@@ -201,6 +201,22 @@ body:before{content:"";position:fixed;inset:0;background:radial-gradient(circle 
 .log-head-bar .lh-watch:active{transform:translateY(1px)}
 .log-area .log-last{margin-top:2px}
 .log-area .etip{margin-top:2px}
+
+/* Readable training dashboard */
+body:after{opacity:.22}.noise,.bg-jp,.slash{display:none}
+#app{max-width:760px;margin:auto}
+.brand{padding:6px 2px 14px;margin-bottom:0}.brand h1{font-size:26px;letter-spacing:.16em}.brand .jp{color:#e98b99}.online{font-size:10px;letter-spacing:.1em}
+.home-scroll{scrollbar-width:thin;scrollbar-color:#35313a transparent;padding-right:2px}
+.today{clip-path:none;border-radius:14px;border-color:#303039;background:linear-gradient(135deg,#17171e,#0e0e14);margin:6px 0 16px;padding:6px;opacity:1!important}
+.today:before{width:2px;top:18px;bottom:18px}.today-head{padding:14px 12px 10px}.today-title{font-size:11px;letter-spacing:.12em;color:#ee9bab}.today-day{font-size:22px;letter-spacing:0;line-height:1.25}.day-tag{font-size:11px;letter-spacing:.025em;line-height:1.6;color:#b8b5bf}.today-jp{opacity:.4}
+.today-actions{gap:10px;padding:10px 12px 14px}.today-actions .tbtn{min-width:0;min-height:76px;clip-path:none;border-radius:9px;text-align:left;padding:15px 12px;font-size:13px;line-height:1.4;letter-spacing:.02em;border:1px solid #3a3540;background:#202027;color:#f4eadc;box-shadow:none;white-space:normal}
+.today-actions .tbtn small{font-size:11px;letter-spacing:.01em;line-height:1.5;color:#bbb6c1;margin-top:6px}.today-actions .tbtn.on{background:linear-gradient(125deg,#b91636,#78112b);border-color:#ff5571;color:white}.today-actions .tbtn.on small{color:#ffe0e6}.today-actions .tbtn.on:after{content:'NEXT IN ROTATION';display:block;font-size:9px;letter-spacing:.08em;color:#ffe0e6;margin-top:8px}
+.today-actions .tbtn.emerg{border-color:#35534e;color:#a9d7cc;background:#14201f}.today-q{font-size:11px;letter-spacing:.06em;padding-left:12px}.streak-row{padding:0 12px 4px}.streak-num{font-size:22px}
+.session.card{clip-path:none;border-radius:10px;box-shadow:none;min-height:84px}.session .name{font-size:15px;letter-spacing:.035em;line-height:1.4}.session .meta{font-size:11px;letter-spacing:.02em;line-height:1.5}.session .kanji{font-size:34px;color:#abc2b8}.syslabel-tx{font-size:11px;letter-spacing:.12em}
+.nav{max-width:760px;margin:auto}.nav button{font-size:10px;letter-spacing:.025em;position:relative}.nav button.on{color:#ff7188;background:#221018}.nav button.on:before{content:'';position:absolute;top:0;width:26px;height:2px;background:#ff5472}
+button:focus-visible{outline:2px solid #ff8295;outline-offset:-3px}
+@media(hover:hover){.today-actions .tbtn:hover{border-color:#e76c85;filter:brightness(1.12)}}
+@media(max-width:380px){.today-day{font-size:19px}.today-actions{padding:8px;gap:8px}.today-actions .tbtn{font-size:12px;padding:12px 9px}.session{grid-template-columns:36px 1fr 30px;gap:8px}.session .name{font-size:13px}}
 </style>
 </head>
 <body>
