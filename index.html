@@ -250,7 +250,7 @@ function buildGymPlan(day){
 function nextGymDay(){let last=null;for(let i=0;i<state.streak.length;i++){let s=state.streak[i];if(s.gymDay&&GYM_ORDER.includes(s.gymDay)){last=s.gymDay;break}}if(!last)return'push';let idx=GYM_ORDER.indexOf(last);return GYM_ORDER[(idx+1)%GYM_ORDER.length]}
 const GYM_FULLBODY={name:'Full Body Protocol',ex:[
  {name:'Pull-Ups',detail:'full hang, chin over bar — width driver, add weight when 10+ is easy',reps:'6–10',rest:REST.heavy,type:'Back',art:'引',wd:2,we:2,log:true},
- {name:'Dips',detail:'chest lean forward, deep range',reps:'8–12',rest:REST.heavy,type:'Chest',art:'沈',wd:2,we:2,log:true},
+ {name:'Machine Chest Press',detail:'flat/incline machine, lean forward slightly — full stretch, no lockout bounce',reps:'8–12',rest:REST.heavy,type:'Chest',art:'沈',wd:2,we:2,log:true},
  {name:'Standing Cable Incline Press',detail:'upper chest',reps:'10–12',rest:REST.normal,type:'Chest',art:'胸',wd:2,we:2,log:true},
  {name:'Seated Cable Row',detail:'medium grip — back thickness',reps:'10–12',rest:REST.normal,type:'Back',art:'拉',wd:2,we:2,log:true},
  {name:'Cable Lateral Raise',detail:'single arm, leaning — delt cap for V-taper',reps:'12–15',rest:REST.isolation,type:'Shoulders',art:'肩',wd:2,we:2,log:true},
@@ -258,7 +258,7 @@ const GYM_FULLBODY={name:'Full Body Protocol',ex:[
  {name:'Leg Press',detail:'light, high rep — exhale up',reps:'15–20',rest:REST.normal,type:'Legs',art:'脚',wd:2,we:2,log:true},
  {name:'Back Extension',detail:'controlled range, squeeze glutes+lower back at top — no snap, exhale up',reps:'12–15',rest:REST.normal,type:'Back',art:'腰',wd:2,we:2,log:true},
  {name:'Seated Leg Curl',detail:'pull heels, squeeze — hamstring balance',reps:'12–15',rest:REST.normal,type:'Legs',art:'屈',wd:0,we:2,log:true},
- {name:'Hanging Leg Raise',detail:'straight legs, no swing — taper the waist',reps:'10–15',rest:REST.normal,type:'Core',art:'芯',wd:0,we:2,log:false}
+ {name:'Cable Pallof Press',detail:'anti-rotation, breathe out — core without spinal loading',reps:'12–15',rest:REST.isolation,type:'Core',art:'芯',wd:0,we:2,log:true}
 ]};
 function buildFullBodyPlan(mode){
  let we=mode==='weekend';
